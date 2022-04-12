@@ -6,7 +6,8 @@ import plotly.express as px
 import dash_bootstrap_components as dbc
 import pandas as pd
 import datetime
-# i added this to commit again
+
+# preprocessing 
 df = pd.read_csv("ted_main.csv")
 print(df.head(1))
 
