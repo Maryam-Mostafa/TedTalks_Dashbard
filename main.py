@@ -35,74 +35,188 @@ print(tag_dict)
 
 #################################Dashboard#############################################
 
-app = dash.Dash(__name__ , external_stylesheets=[dbc.themes.BOOTSTRAP]
-                )
+app = dash.Dash(__name__ , external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = html.Div([
-    dbc.Card(
-        dbc.CardBody([
-            dbc.Row([
-                dbc.Col([
-                    html.Img(src=app.get_asset_url('TED.png'), style={'height': '40%', 'width': '40%'})
-                ], width=4),
-                dbc.Col([
-                    html.H1('Ted Talks Dashboard ', style={
-                        'color': 'red',
-                        'textAlign': 'center'}),
+    # row 1
+    dbc.Row([
+        dbc.Card(
+            dbc.CardBody([
+                dbc.Row([
+                    dbc.Col([
+                        html.Img(src=app.get_asset_url('TED.png'), style={'height': '40%', 'width': '40%'})
+                    ], width=4),
+                    dbc.Col([
+                        html.H1('TED TALKS DASHBOARD ', style={
+                            'color': '#d90000',
+                            'textAlign': 'center',
+                            'font-size': '55px',
+                            "font-weight": "bold"
+                            }),
 
-                ], width=4),
-            ], align='center'),
+                    ], width=4),
+                ], align='center'),
+            ])),
+        ], align='center'),
 
+    # row 2
+    dbc.Row([
+        dbc.Col([
+            dbc.Card(
+                [
+                    dbc.CardImg(src=app.get_asset_url("videoicon.jpg"),
+                                style= {"margin-left": "auto", "margin-right": "auto" ,"width": "60%"}),
+                    dbc.CardBody([
+                        html.H1("#10,000", className="card-title", style = {"font-weight": "bold", 'font-size': '50px'}),
+                        html.Br(),
+                        html.H5(
+                            "Some quick example text to build on the card title and ",
+                            className="card-text",
+                        )
+                    ],style={'text-align': 'center'},
+                    ),
+                ],
+                style={"width": "18rem", "margin-left": "15px", "margin-bottom": "15px", "height": 400},
+            ),
+        ], width=2),
+        dbc.Col([
+            dbc.Card(
+                [
+                    dbc.CardBody(
+                        [
+                            html.H4("Card title", className="card-title"),
+                            html.P("This is some card text", className="card-text"),
+                        ]
+                    ),
+                ],
+                style={"width": "18rem","height":400},className="w-100",
+            )
+        ], width=6),
+        dbc.Col([
+            dbc.Card(
+                dbc.CardBody(
+                    [
+                        html.H4("chart2", className="card-title"),
+                        html.H6("Card subtitle", className="card-subtitle"),
+                    ]
+                ),
+                style={"width": "18rem", "height":400},className="w-100",
+            )
+        ], width=4),
+    ],style={"margin-top": "20px","margin-right": "15px"},),
 
-        ])
+    # row 3
+    dbc.Row([
+        dbc.Col([
+            dbc.Card(
+                [
+                    dbc.CardImg(src=app.get_asset_url("microphone icon.jpg"),
+                                style= {"margin-left": "auto", "margin-right": "auto" ,"width": "60%"}),
+                    dbc.CardBody([
+                        html.H1("#10,000", className="card-title", style = {"font-weight": "bold", 'font-size': '50px'}),
+                        html.Br(),
+                        html.H5(
+                            "Some quick example text to build on the card title and ",
+                            className="card-text",
+                        )
+                    ],style={'text-align': 'center'},
+                    ),
+                ],
+                style={"width": "18rem", "margin-left": "15px", "margin-bottom": "15px", "height": 400},
+            ),
+        ], width=2),
+        dbc.Col([
+            dbc.Card(
+                [
+                    dbc.CardBody(
+                        [
+                            html.H4("Card title", className="card-title"),
+                            html.P("This is some card text", className="card-text"),
+                        ]
+                    ),
+                ],
+                style={"width": "18rem", "height": 400}, className="w-100",
+            )
+        ], width=5),
+        dbc.Col([
+            dbc.Card(
+                dbc.CardBody(
+                    [
+                        html.H4("chart2", className="card-title"),
+                        html.H6("Card subtitle", className="card-subtitle"),
+                    ]
+                ),
+                style={"width": "18rem", "height": 400}, className="w-100",
+            )
+        ], width=5),
+    ], style={"margin-top": "20px","margin-right": "15px"}),
+    # row 4
+    dbc.Row([
+        dbc.Col([
+            dbc.Card(
+                [
+                    dbc.CardImg(src=app.get_asset_url("6851050_preview.png"),
+                                style= {"margin-left": "auto", "margin-right": "auto" ,"width": "60%"}),
+                    dbc.CardBody([
+                        html.H1("#10,000", className="card-title", style = {"font-weight": "bold", 'font-size': '50px'}),
+                        html.Br(),
+                        html.H5(
+                            "Some quick example text to build on the card title and ",
+                            className="card-text",
+                        )
+                    ],style={'text-align': 'center'},
+                    ),
+                ],
+                style={"width": "18rem", "margin-left": "15px", "margin-bottom": "15px", "height": 400},
+            ),
+        ], width=2),
+        dbc.Col([
+            dbc.Card(
+                [
+                    dbc.CardBody(
+                        [
+                            html.H4("Card title", className="card-title"),
+                            html.P("This is some card text", className="card-text"),
+                        ]
+                    ),
+                ],
+                style={"width": "18rem", "height": 400}, className="w-100",
+            )
+        ], width=5),
+        dbc.Col([
+            dbc.Card(
+                dbc.CardBody(
+                    [
+                        html.H4("chart2", className="card-title"),
+                        html.H6("Card subtitle", className="card-subtitle"),
+                    ]
+                ),
+                style={"width": "18rem", "height": 400}, className="w-100",
+            )
+        ], width=5),
+    ], style={"margin-top": "20px","margin-right": "15px"}),
+    # row 5
+    dbc.Row([
+        dbc.Col([
+            dbc.Card(
+                [
+                    dbc.CardBody(
+                        [
+                            html.H4("last card", className="card-title"),
+                            html.P(
+                                "Some quick example text to build on the card title and ",
+                                className="card-text",
+                            )
+                        ]
+                    ),
+                ],
+                style={"width": "18rem", "margin-left": "15px", "margin-bottom": "15px", "margin-top": "15px", "height":350},
+                className="w-100",
+            ),
+        ], width=12),
+    ],style={"margin-right": "15px"}),
 
-    ),
-    dbc.Card(
-    [
-        dbc.CardImg(src=app.get_asset_url("videoicon.jpg"), style={'height': '30%', 'width': '30%','text-align': 'center'},top=True),
-        dbc.CardBody([
-                html.H4("# 10,000", className="card-title"),
-                html.P(
-                    "Some quick example text to build on the card title and ",
-                    className="card-text",
-                )
-            ]
-        ),
-    ],
-    style={"width": "18rem"},
-),
-
- dbc.Card(
-    [
-        dbc.CardImg(src=app.get_asset_url("microphone icon.jpg"), style={'height': '30%', 'width': '30%'},top=True),
-        dbc.CardBody(
-            [
-                html.H4("# 10,989", className="card-title"),
-                html.P(
-                    "Some quick example text to build on the card title and ",
-                    className="card-text",
-                )
-            ]
-        ),
-    ],
-    style={"width": "18rem"},
-),
-dbc.Card(
-    [
-        dbc.CardImg(src=app.get_asset_url("6851050_preview.png"), style={'height': '20%', 'width': '20%','text-align': 'center' },top=True),
-        dbc.CardBody(
-            [
-                html.H4("# 55,387", className="card-title"),
-                html.P(
-                    "Some quick example text to build on the card title and",
-                    className="card-text",
-                )
-            ]
-        ),
-    ],
-    style={"width": "18rem"},
-)
 ])
 
 
 
-app.run_server()
+app.run_server(debug = True)
