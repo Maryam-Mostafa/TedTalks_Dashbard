@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import datetime
 
-# preprocessing 
+# preprocessing
 df = pd.read_csv("ted_main.csv")
 print(df.head(1))
 
