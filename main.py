@@ -36,7 +36,8 @@ print(tag_dict)
 
 #################################Dashboard#############################################
 
-app = dash.Dash(__name__ , external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__ , external_stylesheets=[dbc.themes.BOOTSTRAP],
+                meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
 app.layout = html.Div([
     # row 1
     dbc.Row([
