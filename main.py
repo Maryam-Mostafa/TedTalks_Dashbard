@@ -6,7 +6,8 @@ import plotly.express as px
 import dash_bootstrap_components as dbc
 import pandas as pd
 import datetime
-# i added this to commit again
+
+# preprocessing
 df = pd.read_csv("ted_main.csv")
 print(df.head(1))
 
@@ -35,7 +36,8 @@ print(tag_dict)
 
 #################################Dashboard#############################################
 
-app = dash.Dash(__name__ , external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__ , external_stylesheets=[dbc.themes.BOOTSTRAP],
+                meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
 app.layout = html.Div([
     # row 1
     dbc.Row([
