@@ -26,6 +26,7 @@ df.drop('Date', inplace = True , axis =1)
 # print(df.head(20))
 # print(df.info())
 df["tags"] = df["tags"].apply(eval)
+print("Alaaaa")
 
 def get_dataFrame():
     return  df
