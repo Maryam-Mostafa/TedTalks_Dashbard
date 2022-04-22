@@ -3,51 +3,39 @@ import pandas as pd
 from dataPreperation import get_dataFrame
 
 df = get_dataFrame()
+red_pallete = ['#ff0000','#ffa07a','#f08080','#fa8072','#e9967a','#ff6347','#cd5c5c','#ff4500','#dc143c','#b22222','#8b0000','#800000']
+
 
 def mostPopularTalk():
     most_popular_talk_by_views = df.sort_values(by="views",ascending=False)
-    fig = px.bar(most_popular_talk_by_views[:10], x="views", y="title", title='Most popular TED talks',text = 'views',
-                 orientation='h', color='title' ,color_discrete_sequence=px.colors.sequential.Teal)
+    fig = px.bar(most_popular_talk_by_views[:10], y="views", x="title", text = 'title',
+                  color='title' ,color_discrete_sequence=px.colors.sequential.Reds)
     fig.update_traces(textposition='inside')
     fig.update(layout_showlegend=False)
-    #fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+    fig.update_xaxes(showticklabels=False)
+
+
     return fig
 
 
 def popular_talk_pieChart():
     popular_df = df[['title', 'comments']].sort_values('comments', ascending = False)
-    fig = px.pie(popular_df.iloc[:5,:5], values='comments', names='title', hole=.2, color_discrete_sequence=px.colors.sequential.Reds)# height = 500)
+    fig = px.pie(popular_df.iloc[:5,:5], values='comments', names='title', hole=.2, color_discrete_sequence=px.colors.sequential.RdBu)# height = 500)
+    fig.update(layout_showlegend=False)
     return fig
 
 
-# for getting most popular spreaker
-top_ted_talks_speaker_obj = {}
-for index, row in df.iterrows():
-    speaker = row["main_speaker"]
-    if speaker not in top_ted_talks_speaker_obj:
-        ted_talk_obj = {}
-        ted_talk_obj["speaker_count"] = 1
-        ted_talk_obj["views"] = row["views"]
-        ted_talk_obj["comments"] = row["comments"]
-        ted_talk_obj["main_speaker"] = speaker
-    else:
-        ted_talk_obj = top_ted_talks_speaker_obj.get(speaker)
-        ted_talk_obj["speaker_count"] += 1
-        ted_talk_obj["views"] += row["views"]
-        ted_talk_obj["comments"] += row["comments"]
-        ted_talk_obj["main_speaker"] = speaker
-    top_ted_talks_speaker_obj[speaker] = ted_talk_obj
-
-top_ted_talks_speaker = pd.DataFrame(top_ted_talks_speaker_obj.values())
-top_ted_talks_speaker = top_ted_talks_speaker.sort_values(by="speaker_count",ascending=False)
-
 def most_popular_speaker():
-    top_speakers = top_ted_talks_speaker[:10]
-    fig = px.bar(top_speakers, x = "speaker_count", y = "main_speaker",title='Most popular Speaker',
-                 orientation='h', color='main_speaker' ,color_discrete_sequence=px.colors.sequential.Reds,
-                 labels={'title':'TED talks title' , 'views': 'Total number of views'} )
-    #fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
-    #fig.update_yaxes(ticksuffix = "    ")
+    top_speakers = df.sort_values(by="views", ascending=False)
+    fig = px.bar(top_speakers[:10], x="views", y="main_speaker",
+                 orientation='h', color='main_speaker', color_discrete_sequence=px.colors.sequential.Reds,
+                 labels={'title': 'TED talks title', 'views': 'Total number of views'}, text = 'main_speaker')
+    fig.update_traces(textposition='inside')
+    fig.update_yaxes(showticklabels=False)
+    fig.update(layout_showlegend=False)
+    fig.update_layout(xaxis=dict(showgrid=False),
+                      yaxis=dict(showgrid=False)
+                      )
     return fig
 
 # word cloud
@@ -59,8 +47,10 @@ for word in tag_dict:
 
 list_count = list(count.items())
 list_count.sort(key=lambda i: i[1], reverse=True)
-for i in list_count:
-    print(i[0], ':', i[1])
+#for i in list_count:
+#    print(i[0], ':', i[1])
+
+
 #### this part not working with me ####
 # plt.subplots(figsize = (8,8))
 # wordcloud = WordCloud (
