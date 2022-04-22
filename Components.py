@@ -2,7 +2,7 @@ from dash import  dcc
 from dash import html
 import dash_bootstrap_components as dbc
 from run import app
-from StaticCharts import mostPopularTalk, popular_talk_pieChart, most_popular_speaker
+from StaticCharts import mostPopularTalk, popular_talk_pieChart, most_popular_speaker, most_popular_speaker_occupation
 from dataPreperation import get_dataFrame
 
 df = get_dataFrame()
@@ -112,7 +112,7 @@ def wordCloud():
 
 def mostPopTalk_card():
    talk_card =  [
-                    html.H4("Most popular TED talks", className="card-title"),
+                    html.H4("Most Popular TED Talks", className="card-title"),
                     html.Hr(),
                     #dcc.Graph(figure=mostPopularTalk(), responsive=True)  # style={"width": '140vh'},)
                     drawFigure(id= 'pop_talk',figure=mostPopularTalk()),
@@ -122,13 +122,23 @@ def mostPopTalk_card():
 def mostPopSpreaker_Card():
 
       speaker=[
-                html.H4("Most popular TED speakers", className="card-title"),
+                html.H4("Most Popular TED Speakers", className="card-title"),
                 html.Hr(),
                 #dcc.Graph(figure=most_popular_speaker(), responsive=True)
                 drawFigure(id= 'pop_speaker',figure=most_popular_speaker()),
 
       ]
       return speaker
+
+def most_popular_occupation():
+    occupation = [
+        html.H4("Most Popular Speakers Occupations", className="card-title"),
+        html.Hr(),
+        # dcc.Graph(figure=most_popular_speaker(), responsive=True)
+        drawFigure(id='pop_occupation', figure=most_popular_speaker_occupation()),
+
+    ]
+    return occupation
 
 def mostDiscussionTopic():
     dissc_topic= [

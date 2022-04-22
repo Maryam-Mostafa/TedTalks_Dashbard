@@ -25,6 +25,7 @@ app.layout = html.Div([
     dbc.Row([
         dbc.Col(mostPopTalk_card(), width=4),
         dbc.Col(mostPopSpreaker_Card(), width=4),
+        dbc.Col(most_popular_occupation(),width=4)
     ], align='center', style={"margin-top": "2%","margin-left": "15px", 'layout.autosize': 'true'}, ),  # style={"margin-top": "20px","margin-right": "15px"},),
     # row 3 ==================================================================================================
     dbc.Row([

@@ -5,6 +5,7 @@ from dataPreperation import get_dataFrame
 import pandas as pd
 
 df = get_dataFrame()
+
 # tabs graphs update call back
 @app.callback(Output('duration_fig1','figure'), [Input("tabs", "active_tab")])
 def switch_tab(at):
@@ -33,15 +34,18 @@ def switch_tab_month_year(at):
         flag = False
         year_wise_talks_frequency = pd.DataFrame()
         year_wise_talks_frequency["count"] = df.groupby("year").size()
-        fig = px.line(year_wise_talks_frequency, x=year_wise_talks_frequency.index, y="count",
+        fig = px.area(year_wise_talks_frequency, x=year_wise_talks_frequency.index, y="count",
 
                       labels={'year': 'Year', 'count': 'Frequency'})
 
     elif at == "month_id":
         month_wise_talks_frequency = pd.DataFrame()
         df['count'] = df.groupby("month").size()
+        new_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+                     'November', 'December']
+        month_wise_talks_frequency = month_wise_talks_frequency.reindex(new_order, axis=0)
         month_wise_talks_frequency["count"] = df.groupby("month").size()
-        fig = px.line(month_wise_talks_frequency, x=month_wise_talks_frequency.index,
+        fig = px.area(month_wise_talks_frequency, x=month_wise_talks_frequency.index,
                       y=month_wise_talks_frequency["count"],
                       labels={'month': 'Month', 'count': 'Frequency'})
         fig.update_layout(
