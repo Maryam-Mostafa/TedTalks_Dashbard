@@ -74,14 +74,13 @@ list_count.sort(key=lambda i: i[1], reverse=True)
 
 
 #### this part not working with me ####
-plt.subplots(figsize = (8,8))
-wordcloud = WordCloud (
-    background_color = 'white',
-    colormap = 'gist_heat',
-    width = 1000,
-    height = 600,max_words=11100
-).generate(str(list_count))
-plt.imshow(wordcloud) # image show
-plt.axis('off') # to off the axis of x and y
-plt.savefig("wordcloud.png")
-plt.show()
+# plt.subplots(figsize = (8,8))
+# wordcloud = WordCloud (
+#     background_color = 'white',
+#     colormap = 'gist_heat',
+#     width = 1000,
+#     height = 600,max_words=11100
+# ).generate(str(list_count))
+# plt.imshow(wordcloud) # image show
+# plt.axis('off') # to off the axis of x and y
+# plt.savefig("wordcloud.png")
