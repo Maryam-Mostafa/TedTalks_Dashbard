@@ -6,7 +6,6 @@ import pandas as pd
 from StaticCharts import *
 
 df = get_dataFrame()
-
 # tabs graphs update call back
 @app.callback(Output('duration_fig1','figure'), [Input("tabs", "active_tab")])
 def switch_tab(at):
@@ -17,7 +16,7 @@ def switch_tab(at):
         flag = True
     duration = df[['title','duration']].sort_values('duration', ascending = flag)
     fig = px.bar(duration.iloc[:10], x='title', y='duration',color='duration',
-                 color_continuous_scale='RdGy',labels={'title':'Title of talk'}, template= 'simple_white', text = 'title')
+                 color_continuous_scale= ['#ffb08a', '#f29c7d', '#e68970', '#d97563', '#cd6256', '#c04e49', '#b43b3c', '#a7272f', '#9b1422', '#8e0015'],labels={'title':'Title of talk'}, template= 'simple_white', text = 'title')
     fig.update_traces(textposition='inside')
     fig.update(layout_coloraxis_showscale=False)
     fig.update_xaxes(showticklabels=False)
@@ -25,6 +24,7 @@ def switch_tab(at):
         margin=dict(l=20, r=20, t=20, b=20),
     )
     return fig
+
 
 
 @app.callback(Output('year-month_fig','figure'), [Input("tabs_ym", "active_tab")])
