@@ -7,7 +7,7 @@ from dataPreperation import get_dataFrame
 
 df = get_dataFrame()
 
-red_color = '#b22222' #'#800000'
+red_color = '#9b1422' #'#b22222' #'#800000'
 
 config = {'displayModeBar': False, 'autosizable': False}
 
@@ -32,9 +32,6 @@ def mainTitle_desc():
             #"font-weight": "bold"
         })]
     return main_title
-
-
-# def singleCard (): when alaa comes
 
 def bigCards():
     card_group = dbc.CardGroup([
@@ -102,8 +99,7 @@ def wordCloud():
     img_card = [
             html.H4("Top TED searched tags", className="card-text"),
             html.Hr(),
-            html.Br(),
-            html.Img(src=app.get_asset_url("pic.jpg"))
+            html.Img(src=app.get_asset_url("finalwc.png"))
         ]
         #style={ "height": '100%'},
 
@@ -201,3 +197,5 @@ def main_years_slider():
                    ), html.Br()
         ]
    return slider
+
+
