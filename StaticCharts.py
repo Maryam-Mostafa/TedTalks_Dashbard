@@ -6,7 +6,7 @@ from dataPreperation import get_dataFrame
 from wordcloud import WordCloud
 from PIL import Image
 import numpy as np
-
+# try again
 data = get_dataFrame()
 red_pallete = ['#ff0000', '#ffa07a', '#f08080', '#fa8072', '#e9967a', '#ff6347', '#cd5c5c', '#ff4500', '#dc143c',
                '#b22222', '#8b0000', '#800000']
