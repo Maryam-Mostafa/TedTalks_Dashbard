@@ -2,13 +2,14 @@ from dash import  dcc
 from dash import html
 import dash_bootstrap_components as dbc
 from run import app
-from StaticCharts import mostPopularTalk, popular_talk_pieChart, most_popular_speaker
+from StaticCharts import mostPopularTalk, popular_talk_pieChart, most_popular_speaker, most_popular_speaker_occupation
 from dataPreperation import get_dataFrame
 
 df = get_dataFrame()
 
 red_color = '#b22222' #'#800000'
-config = {'displayModeBar': False, 'autosizable': False, 'responsive': True}
+
+config = {'displayModeBar': False, 'autosizable': False}
 
 def mainTitle_desc():
     main_title = [
@@ -83,7 +84,6 @@ def bigCards():
 def yearMonthCard():
     y_m_ChartCard = [
         html.H4("TED talks through months and years", className="card-title"),
-        html.Hr(),
         dbc.Tabs(
             [
                 dbc.Tab(label="Year-Wise", tab_id="year_id"),
@@ -102,9 +102,8 @@ def wordCloud():
     img_card = [
             html.H4("Top TED searched tags", className="card-text"),
             html.Hr(),
-            html.Br(),html.Br(),
-            html.Img(src=app.get_asset_url("pic.jpg"),
-                        style={"margin-left": "auto", "margin-right": "-50%"})
+            html.Br(),
+            html.Img(src=app.get_asset_url("pic.jpg"))
         ]
         #style={ "height": '100%'},
 
@@ -112,30 +111,37 @@ def wordCloud():
 
 def mostPopTalk_card():
    talk_card =  [
-                    html.H4("Most popular TED talks", className="card-title"),
+                    html.H4("Most Popular TED Talks", className="card-title"),
                     html.Hr(),
-                    #dcc.Graph(figure=mostPopularTalk(), responsive=True)  # style={"width": '140vh'},)
-                    drawFigure(id= 'pop_talk',figure=mostPopularTalk()),
+                    dcc.Graph(id='pop_talk', config=config, style={'height': '100%'}),
                 ]
    return talk_card
 
 def mostPopSpreaker_Card():
 
       speaker=[
-                html.H4("Most popular TED speakers", className="card-title"),
+                html.H4("Most Popular TED Speakers", className="card-title"),
                 html.Hr(),
-                #dcc.Graph(figure=most_popular_speaker(), responsive=True)
-                drawFigure(id= 'pop_speaker',figure=most_popular_speaker()),
+                dcc.Graph(id='pop_speaker', config=config)#, style={'height': '100%'}),
 
       ]
       return speaker
+
+def most_popular_occupation():
+    occupation = [
+        html.H4("Most Popular Speakers Occupations", className="card-title"),
+        html.Hr(),
+        dcc.Graph(id='pop_occupation', config=config)#, style={'height': '100%'}),
+
+    ]
+    return occupation
 
 def mostDiscussionTopic():
     dissc_topic= [
                     html.H4("Top most attracted and discussed topics",
                             className="card-title"),
                     html.Hr(),
-                    drawFigure(id='duration_fig',figure=popular_talk_pieChart()),
+                    dcc.Graph(id='most_disscused_talk', config=config)#, style={'height': '100%'}),
                     #dcc.Graph(id='duration_fig', figure=popular_talk_pieChart(), responsive=True),
                 ]
     return dissc_topic
@@ -152,10 +158,10 @@ def duration_card():
                     id="tabs",
                     active_tab="tab1_id",
                 ),
-                dcc.Graph(id='duration_fig1', responsive=True, config=config, style={'height':'100%'}),
+                dcc.Graph(id='duration_fig1', config=config)#, style={'height':'100%'}),
             ]
     return duration
-
+# not used yet
 def talkOfFavSpeaker_card():
    fav =  [
             html.H4("Finding TED talks of your favorite Author", className="card-title"),
@@ -164,17 +170,34 @@ def talkOfFavSpeaker_card():
    return fav
 
 # Draw figure Function
-def drawFigure(figure=None, id=None, config={'displayModeBar': False, 'autosizable':False, 'responsive':True}):
-    return dcc.Graph(
-                    id=id,
-                    figure=figure.update_layout(
-                        template     = 'simple_white',
-                        #plot_bgcolor = 'rgba(0, 0, 0, 0)',
-                        #paper_bgcolor= 'rgba(0, 0, 0, 0)',
-                        #autosize=True,
-                        margin=dict(l=20, r=20, t=20, b=20),
+# def drawFigure(figure=None, id=None, config={'displayModeBar': False, 'autosizable':False, 'responsive':True}):
+#     return dcc.Graph(
+#                     id=id,
+#                     figure=figure.layout(
+#                         template     = 'simple_white',
+#                         #plot_bgcolor = 'rgba(0, 0, 0, 0)',
+#                         #paper_bgcolor= 'rgba(0, 0, 0, 0)',
+#                         #autosize=True,
+#                         margin=dict(l=20, r=20, t=20, b=20),
+#
+#                     ),
+#                     config=config,
+#                     style={'background-color':'white','height':'100%'} ## want the graph background to be transperent
+#                 )
 
-                    ),
-                    config=config,
-                    style={'background-color':'white','height':'100%'} ## want the graph background to be transperent
-                )
+# slider
+# print(df.head(1))
+def main_years_slider():
+   minYear = df['year'].min()
+   #maxYear = df['year'].max()
+   slider = [
+       html.H6("Select a year", className="card-title"),
+       html.Br(),
+        dcc.Slider(
+            id='main_slider_id',
+            step=None,
+            value=minYear,
+            marks={str(i): str(i) for i in df['year'].unique()}
+                   ), html.Br()
+        ]
+   return slider

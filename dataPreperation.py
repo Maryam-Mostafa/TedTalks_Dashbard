@@ -1,23 +1,31 @@
 import pandas as pd
 
-# preprocessing
+# Read The Ted DataSet
 df = pd.read_csv("ted_main.csv")
+# Print The First Row of the Data(df)
 # print(df.head(1))
-#
-# #get Data_set Information (Nulls , Numbers of Records , Data Types)
+
+
+#get Data_set Information (Nulls , Numbers of Records , Data Types)
 # print(df.info())
-#
-# # Count Null Values of each Column
+
+# Count Null Values of each Column
 # print(df.isna().sum())
 
-#preprocessing on data
+#Preprocessing The Data
+
+#Convert The Date Col. from Unix Timestamp to Date Type
 df['Date'] = pd.to_datetime(df['published_date'], unit='s')
+
+#Drop Some Columns.
 df.drop(columns = ['description','event', 'film_date', 'languages', 'name','num_speaker',
                    'published_date' , 'ratings', 'related_talks'], axis = 1 , inplace = True)
+
 # print(df.head(1))
+
 # print(df.info())
 
-# df['month'] = df['Date'].map(lambda x: x.month)
+#df['month'] = df['Date'].map(lambda x: x.month)
 # df['month'].sort_values()
 df['month']= df['Date'].dt.month_name()
 df["year"] = df['Date'].map(lambda x: x.year)
