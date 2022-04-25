@@ -135,7 +135,7 @@ def update_graphs_Slider_drop(curr_year,dropDownList):
         print(f"year = {curr_year}          dropdown = {dropDownList}")
         filterDf = df[(df.year == curr_year) & (df['name'].isin(dropDownList))]
 
-    elif (curr_year) and (dropDownList is  None):
+    elif (curr_year) and (dropDownList is  None or dropDownList == []):
         print('\nslider')
         print(f"year = {curr_year}          dropdown = {dropDownList}")
         filterDf = df[df.year == curr_year]
