@@ -12,24 +12,24 @@ red_color = '#9b1422'
 config = {'displayModeBar': False, 'autosizable': False}
 
 def mainTitle_desc():
-    main_title = [
-        dbc.Row([
-            dbc.Col(html.Img(src=app.get_asset_url('t.png'),width=90),width = 3),
-            dbc.Col(
-                html.H1('TED ideas worth spreading',
-                    style={'color': red_color,"font-weight": "bold" , 'margin-top': '6%','margin-left': '-55px'})
-                ,width = 7)
-             ],justify='start', className="g-0"),
-        html.Hr(),
-        html.P('Ted is a nonprofit devoted to spreading ideas,'
-                ' in the form of short, powerful talks.'
-                ' Ted began in 1984 as a conference where Technology, Entertainment and Design converged,'
-                ' and today covers almost all topics from science to business to global issues in more'
-                ' than 100 languages. Meanwhile, independently run TEDx events help share ideas in communities'
-                ' around the world.', style={
-            'color': 'black',
-            'font-size': '12',
-        })]
+    title = dbc.CardGroup([
+        html.Img(src=app.get_asset_url('t.png'),style={ "width": "10%", "height": "10%", "margin-right":"3px"}),
+        html.H1('TED',style={'color': red_color,"font-weight": "900" ,"font-family":"Helvetica",'font-size':'100px', 'margin-top': '3%'}),
+        html.H3('ideas worth spreading',
+                style={'color': 'black', "font-weight": "bold", "font-family": "Helvetica",'margin-top': '10%'}),
+        ])
+    main_title = [ title,
+                   html.Hr(),
+                   html.P('Ted is a nonprofit devoted to spreading ideas,'
+                          ' in the form of short, powerful talks.'
+                          ' Ted began in 1984 as a conference where Technology, Entertainment and Design converged,'
+                          ' and today covers almost all topics from science to business to global issues in more'
+                          ' than 100 languages. Meanwhile, independently run TEDx events help share ideas in communities'
+                          ' around the world.', style={
+                       'color': 'black',
+                       'font-size': '12', }
+                          )
+                      ]
     return main_title
 
 def bigCards():
@@ -184,7 +184,6 @@ def filters():
     row = dbc.Row([
         dbc.Col(main_years_slider(), width=8),
         dbc.Col(dropDown(), width=4),
-        #dbc.Col(button(),width=1, )
 
     ], justify='evenly')
     return row
@@ -204,13 +203,3 @@ def graphes2():
 
     ],justify='evenly')
     return row
-
-def button():
-    return [html.Br(),
-            html.Br(),
-            dbc.Button(id='buttonID', children='Result',
-            n_clicks=0,outline=True, className="me-1",
-                       style = {'background-color': '#9b1422',
-                      'color': 'white',
-                      'height': '50px',
-                      'width': '100px',})]
