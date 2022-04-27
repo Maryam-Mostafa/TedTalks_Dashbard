@@ -7,34 +7,30 @@ from dataPreperation import get_dataFrame
 
 df = get_dataFrame()
 
-red_color = '#b22222' #'#800000'
+red_color = '#9b1422'
 
 config = {'displayModeBar': False, 'autosizable': False}
 
 def mainTitle_desc():
-    main_title = [
-        dbc.Row([
-            dbc.Col(html.Img(src=app.get_asset_url('t.png'),width=90),width = 3), #style={'height': '45%', 'width': '35%'}
-            dbc.Col(
-                html.H1('TED ideas worth spreading',
-                    style={'color': red_color,"font-weight": "bold" , 'margin-top': '6%','margin-left': '-55px'})
-                ,width = 7)
-             ],justify='start', className="g-0"),
-        html.Hr(),
-        html.P('Ted is a nonprofit devoted to spreading ideas,'
-                ' in the form of short, powerful talks.'
-                ' Ted began in 1984 as a conference where Technology, Entertainment and Design converged,'
-                ' and today covers almost all topics from science to business to global issues in more'
-                ' than 100 languages. Meanwhile, independently run TEDx events help share ideas in communities'
-                ' around the world.', style={
-            'color': 'black',
-            'font-size': '12',
-            #"font-weight": "bold"
-        })]
+    title = dbc.CardGroup([
+        html.Img(src=app.get_asset_url('t.png'),style={ "width": "10%", "height": "10%", "margin-right":"3px"}),
+        html.H1('TED',style={'color': red_color,"font-weight": "900" ,"font-family":"Helvetica",'font-size':'100px', 'margin-top': '3%'}),
+        html.H3('ideas worth spreading',
+                style={'color': 'black', "font-weight": "bold", "font-family": "Helvetica",'margin-top': '10%'}),
+        ])
+    main_title = [ title,
+                   html.Hr(),
+                   html.P('Ted is a nonprofit devoted to spreading ideas,'
+                          ' in the form of short, powerful talks.'
+                          ' Ted began in 1984 as a conference where Technology, Entertainment and Design converged,'
+                          ' and today covers almost all topics from science to business to global issues in more'
+                          ' than 100 languages. Meanwhile, independently run TEDx events help share ideas in communities'
+                          ' around the world.', style={
+                       'color': 'black',
+                       'font-size': '12', }
+                          )
+                      ]
     return main_title
-
-
-# def singleCard (): when alaa comes
 
 def bigCards():
     card_group = dbc.CardGroup([
@@ -47,7 +43,6 @@ def bigCards():
                 html.H4(
                     "NUMBER OF TALKS",
                     className="card-text",
-                    #style={'margin-top': '15%'}
                 )
             ], style={'text-align': 'center','padding':'15%','color':'white','background-color':red_color},
             ),
@@ -92,38 +87,32 @@ def yearMonthCard():
             id="tabs_ym",
             active_tab="year_id",
         ),
-        dcc.Graph(id='year-month_fig')
+        dcc.Graph(id='year-month_fig', className="shadow")
     ]
-
     return y_m_ChartCard
 
-##### still ++++++++++++++++
+
 def wordCloud():
-    img_card = [
+    img_card = html.Div([
             html.H4("Top TED searched tags", className="card-text"),
             html.Hr(),
-            html.Br(),
-            html.Img(src=app.get_asset_url("pic.jpg"))
-        ]
-        #style={ "height": '100%'},
-
+            html.Img(src=app.get_asset_url("finalwc.png"),style={'height':'100%', 'width':'100%'}, className='shadow')
+        ])
     return img_card
 
 def mostPopTalk_card():
    talk_card =  [
                     html.H4("Most Popular TED Talks", className="card-title"),
                     html.Hr(),
-                    dcc.Graph(id='pop_talk', config=config, style={'height': '100%'}),
+                    dcc.Graph(id='pop_talk', config=config, className='shadow'),
                 ]
    return talk_card
 
 def mostPopSpreaker_Card():
-
       speaker=[
                 html.H4("Most Popular TED Speakers", className="card-title"),
                 html.Hr(),
-                dcc.Graph(id='pop_speaker', config=config)#, style={'height': '100%'}),
-
+                dcc.Graph(id='pop_speaker', config=config, className='shadow')
       ]
       return speaker
 
@@ -131,18 +120,17 @@ def most_popular_occupation():
     occupation = [
         html.H4("Most Popular Speakers Occupations", className="card-title"),
         html.Hr(),
-        dcc.Graph(id='pop_occupation', config=config)#, style={'height': '100%'}),
+        dcc.Graph(id='pop_occupation', config=config, className='shadow')
 
     ]
     return occupation
 
 def mostDiscussionTopic():
     dissc_topic= [
-                    html.H4("Top most attracted and discussed topics",
+                    html.H4("Top most discussed topics",
                             className="card-title"),
                     html.Hr(),
-                    dcc.Graph(id='most_disscused_talk', config=config)#, style={'height': '100%'}),
-                    #dcc.Graph(id='duration_fig', figure=popular_talk_pieChart(), responsive=True),
+                    dcc.Graph(id='most_disscused_talk', config=config, className='shadow')
                 ]
     return dissc_topic
 
@@ -158,46 +146,60 @@ def duration_card():
                     id="tabs",
                     active_tab="tab1_id",
                 ),
-                dcc.Graph(id='duration_fig1', config=config)#, style={'height':'100%'}),
+                dcc.Graph(id='duration_fig1', config=config, className='shadow', style={'height':'62vh'})
             ]
     return duration
-# not used yet
-def talkOfFavSpeaker_card():
-   fav =  [
-            html.H4("Finding TED talks of your favorite Author", className="card-title"),
-            html.Hr(),
-         ]
-   return fav
 
-# Draw figure Function
-# def drawFigure(figure=None, id=None, config={'displayModeBar': False, 'autosizable':False, 'responsive':True}):
-#     return dcc.Graph(
-#                     id=id,
-#                     figure=figure.layout(
-#                         template     = 'simple_white',
-#                         #plot_bgcolor = 'rgba(0, 0, 0, 0)',
-#                         #paper_bgcolor= 'rgba(0, 0, 0, 0)',
-#                         #autosize=True,
-#                         margin=dict(l=20, r=20, t=20, b=20),
-#
-#                     ),
-#                     config=config,
-#                     style={'background-color':'white','height':'100%'} ## want the graph background to be transperent
-#                 )
 
-# slider
-# print(df.head(1))
 def main_years_slider():
-   minYear = df['year'].min()
-   #maxYear = df['year'].max()
    slider = [
-       html.H6("Select a year", className="card-title"),
+       html.H6("Select a year", className="me-1"),
        html.Br(),
         dcc.Slider(
+            df['year'].min(),
+            df['year'].max(),
             id='main_slider_id',
             step=None,
-            value=minYear,
+            value=None,
             marks={str(i): str(i) for i in df['year'].unique()}
                    ), html.Br()
         ]
    return slider
+
+def dropDown():
+    drop = [
+        html.H6("Rate type", className="me-1"),
+        html.Br(),
+        dcc.Dropdown(id = 'dropDownId',
+                  options = [{'label': str(rate_type), 'value':str(rate_type)} for rate_type in df['name'].unique()],
+                  value = None,
+                  placeholder = 'Choose rate types...',
+                  multi = True,
+                  className = 'dropdown'
+                 ),
+        html.Br()]
+    return drop
+
+def filters():
+    row = dbc.Row([
+        dbc.Col(main_years_slider(), width=8),
+        dbc.Col(dropDown(), width=4),
+
+    ], justify='evenly')
+    return row
+
+def graphes1():
+    row = dbc.Row([
+        dbc.Col(most_popular_occupation(), width=6),
+        dbc.Col(mostPopSpreaker_Card(), width=6),
+
+    ],justify='evenly')
+    return row
+
+def graphes2():
+    row = dbc.Row([
+        dbc.Col(mostPopTalk_card(), width=6),
+        dbc.Col(mostDiscussionTopic(), width=6),
+
+    ],justify='evenly')
+    return row
