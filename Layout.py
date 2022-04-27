@@ -10,8 +10,8 @@ app.layout = dbc.Container([
 
     # row 1 cards of big number  ================================================================================
     dbc.Row([
-        dbc.Col(mainTitle_desc(), width=8),
-        dbc.Col([bigCards()], width=4),
+        dbc.Col(mainTitle_desc(), width=7),
+        dbc.Col([bigCards()], width=5),
 
         ], justify='evenly'),
     html.Br(),

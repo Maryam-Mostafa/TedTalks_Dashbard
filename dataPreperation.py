@@ -41,7 +41,6 @@ df = df.join(df1).reset_index(drop=True)
 df = df.loc[df.groupby(['title'])['count'].idxmax()]
 new_data = df.drop(['id', 'ratings'], axis=1).reset_index(drop=True)
 
-
 # print(len(new_data))
 # print(new_data.iloc[0])
 
