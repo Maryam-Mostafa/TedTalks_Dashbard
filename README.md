@@ -36,7 +36,7 @@ dataset can be found on kaggle. https://www.kaggle.com/datasets/rounakbanik/ted-
 :heavy_check_mark: Dashboard. \
 :heavy_check_mark: Plotly. \
 :heavy_check_mark: Dash. \
-:heavy_check_mark: scikit learn cosine similarity. \
+:heavy_check_mark: scikit learn cosine similarity. 
 
 
 
