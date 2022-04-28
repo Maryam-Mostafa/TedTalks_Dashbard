@@ -3,19 +3,16 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import plotly.graph_objects as go
 from dataPreperation import get_dataFrame
-# from wordcloud import WordCloud
+from wordcloud import WordCloud
 import seaborn as sns
 
-# try again
 data = get_dataFrame()
-# palette = sns.color_palette("RdGy",10).as_hex()
-# print(palette)
-
 
 red_pallete = ['#8e0015', '#9b1422', '#a7272f', '#b43b3c', '#c04e49', '#cd6256', '#d97563', '#e68970', '#f29c7d',
                '#ffb08a']
 
 
+# view most popular talk based on views in a bar chart
 def mostPopularTalk(df):
     most_popular_talk_by_views = df.sort_values(by="views", ascending=False)
     fig = px.bar(most_popular_talk_by_views[:10], y="title", x="views", text='title', orientation='h',
@@ -30,6 +27,7 @@ def mostPopularTalk(df):
     return fig
 
 
+# view the most discussed talks based on comment in a donut chart
 def popular_talk_pieChart(df):
     popular_df = df[['title', 'comments']].sort_values('comments', ascending=False)
     fig = px.pie(popular_df.iloc[:5], values='comments', names='title', hole=.2,
@@ -40,6 +38,7 @@ def popular_talk_pieChart(df):
     return fig
 
 
+# view popular speaker based on views in a bar chart
 def most_popular_speaker(df):
     top_speakers = df.sort_values(by="views", ascending=False)
     top_speakers.drop_duplicates(subset=['main_speaker'], inplace=True)
@@ -56,6 +55,7 @@ def most_popular_speaker(df):
     return fig
 
 
+# view most popular speaker occupation in a bar chart
 def most_popular_speaker_occupation(df):
     top_occupations = df.sort_values(by="views", ascending=False)
     top_occupations.drop_duplicates(subset=['speaker_occupation'], inplace=True)
@@ -74,6 +74,7 @@ def most_popular_speaker_occupation(df):
     return fig
 
 
+# view talk based on duration in a bar chart
 def durationBar_chart(df, at):
     flag = False
     if at == "tab1_id":
@@ -124,29 +125,30 @@ def new_scatter_line(df, at):
     )
     fig = go.Figure(data=trace, layout=layout)
     return fig
-###################################### keep this ##################################################
-# #word cloud chart not working with me because of liberary
-# def create_wordCloud_img():
-#     tag_dict = pd.Series([x for _list in data.tags for x in _list])
-#     count = {}
-#     for word in tag_dict:
-#         count.setdefault(word, 0)
-#         count[word] += 1
-#
-#     list_count = list(count.items())
-#     list_count.sort(key=lambda i: i[1], reverse=True)
-#     for i in list_count:
-#        print(i[0], ':', i[1])
 
-# plt.subplots(figsize = (8,8))
-# wordcloud = WordCloud(
-#     background_color = 'white',
-#     colormap = 'gist_heat',
-#     width = 800,
-#     height = 800,max_words=11100
-# ).generate(str(list_count))
-# plt.imshow(wordcloud) # image show
-# plt.axis('off') # to off the axis of x and y
-# plt.savefig("wordcloud.png")
-# plt.show()
-#############################################################################################
+
+# creating word cloud and save it as img
+def create_wordCloud_img():
+    tag_dict = pd.Series([x for _list in data.tags for x in _list])
+    count = {}
+    for word in tag_dict:
+        count.setdefault(word, 0)
+        count[word] += 1
+
+    list_count = list(count.items())
+    list_count.sort(key=lambda i: i[1], reverse=True)
+    for i in list_count:
+        print(i[0], ':', i[1])
+
+    plt.subplots(figsize=(8, 8))
+    wordcloud = WordCloud(
+        background_color='white',
+        colormap='gist_heat',
+        width=800,
+        height=800, max_words=11100
+    ).generate(str(list_count))
+    plt.imshow(wordcloud)  # image show
+    plt.axis('off')  # to off the axis of x and y
+    plt.savefig("wordcloud.png")
+    plt.show()
+

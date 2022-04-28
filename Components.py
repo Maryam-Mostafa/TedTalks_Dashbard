@@ -5,12 +5,14 @@ from run import app
 from StaticCharts import mostPopularTalk, popular_talk_pieChart, most_popular_speaker, most_popular_speaker_occupation
 from dataPreperation import get_dataFrame
 
+# preparing dataframe to be used
 df = get_dataFrame()
 
+# some global varibales
 red_color = '#9b1422'
-
 config = {'displayModeBar': False, 'autosizable': False}
 
+# main title components
 def mainTitle_desc():
     title = dbc.CardGroup([
         html.Img(src=app.get_asset_url('t.png'),style={ "width": "10%", "height": "10%", "margin-right":"3px"}),
@@ -32,6 +34,7 @@ def mainTitle_desc():
                       ]
     return main_title
 
+# big cards number component
 def bigCards():
     card_group = dbc.CardGroup([
         dbc.Card([
@@ -75,7 +78,11 @@ def bigCards():
     ])
     return card_group
 
+################################################################################################
+#                                    analysis components in layout                             #
+################################################################################################
 
+# year/month figure with tabs
 def yearMonthCard():
     y_m_ChartCard = [
         html.H4("TED talks through months and years", className="card-title"),
@@ -91,7 +98,7 @@ def yearMonthCard():
     ]
     return y_m_ChartCard
 
-
+# creating word cloud and call it but, we are not calling it as we already did and have the img
 def wordCloud():
     img_card = html.Div([
             html.H4("Top TED searched tags", className="card-text"),
@@ -100,6 +107,7 @@ def wordCloud():
         ])
     return img_card
 
+# most popular talk figure card
 def mostPopTalk_card():
    talk_card =  [
                     html.H4("Most Popular TED Talks", className="card-title"),
@@ -108,6 +116,7 @@ def mostPopTalk_card():
                 ]
    return talk_card
 
+# most popular speaker figure card
 def mostPopSpreaker_Card():
       speaker=[
                 html.H4("Most Popular TED Speakers", className="card-title"),
@@ -116,6 +125,7 @@ def mostPopSpreaker_Card():
       ]
       return speaker
 
+# most popular speaker occupation figure card
 def most_popular_occupation():
     occupation = [
         html.H4("Most Popular Speakers Occupations", className="card-title"),
@@ -125,6 +135,7 @@ def most_popular_occupation():
     ]
     return occupation
 
+# most disscused and argued talk figure based on comments card
 def mostDiscussionTopic():
     dissc_topic= [
                     html.H4("Top most discussed topics",
@@ -134,6 +145,7 @@ def mostDiscussionTopic():
                 ]
     return dissc_topic
 
+# duration longest and shortest and tabs figure card
 def duration_card():
     duration =  [
                 html.H4("The most longest and shortest talks duration", className="card-title"),
@@ -150,7 +162,7 @@ def duration_card():
             ]
     return duration
 
-
+# year slider with title
 def main_years_slider():
    slider = [
        html.H6("Select a year", className="me-1"),
@@ -166,7 +178,8 @@ def main_years_slider():
         ]
    return slider
 
-def dropDown(): # rate type dropdown
+# rate type dropdown with title
+def dropDown():
     drop = [
         html.H6("Rate type", className="me-1"),
         html.Br(),
@@ -180,14 +193,16 @@ def dropDown(): # rate type dropdown
         html.Br()]
     return drop
 
+# combine the above 2 filters in one a row
 def filters():
     row = dbc.Row([
         dbc.Col(main_years_slider(), width=8),
         dbc.Col(dropDown(), width=4),
 
     ], justify='evenly')
-    return row
 
+
+# combine most_popular_occupation and mostPopSpreaker_Card in one a row
 def graphes1():
     row = dbc.Row([
         dbc.Col(most_popular_occupation(), width=6),
@@ -196,6 +211,7 @@ def graphes1():
     ],justify='evenly')
     return row
 
+# combine mostPopTalk_card and mostDiscussionTopic in a row
 def graphes2():
     row = dbc.Row([
         dbc.Col(mostPopTalk_card(), width=6),
@@ -204,15 +220,17 @@ def graphes2():
     ],justify='evenly')
     return row
 
+# merging all above elemnets in a big container for the analysis
 def analysis_container():
      analysis = dbc.Container([
-         dbc.Row([
+                # row 1: filters ==================================================
+                dbc.Row([
                     dbc.Col(filters(), width=12, className="card"),
 
                 ],justify='around'),
                 html.Br(),
 
-                # row 3 ==================================================================================================
+                # row 2: the 4 graphs merging then here in 2 cols ====================
                 dbc.Row([
                     dbc.Col(graphes1(), width=6),
                     dbc.Col(graphes2(), width=6),
@@ -220,7 +238,7 @@ def analysis_container():
                 ],justify='evenly', className='div'),
                 html.Br(),
 
-                # row 4 ==================================================================================================
+                # row 3: wordcloud and duration =======================================
                 dbc.Row([
                     dbc.Col(wordCloud(), width=4,),
                     dbc.Col(duration_card(), width=8),
@@ -228,7 +246,7 @@ def analysis_container():
                 ]),
                 html.Br(),
 
-                # row 5 ==================================================================================================
+                # row 4: last graph in analysis talks count throw year/month ============
                 dbc.Row([
                     dbc.Col(yearMonthCard(), width=12),
                 ])
@@ -240,8 +258,11 @@ def analysis_container():
 
      return analysis
 
-##################################### recommendation components for layout ######################################
+################################################################################################
+#                              recommendation components in layout                             #
+################################################################################################
 
+# dropdown of talk names
 def talk_dropDown():
     drop = dcc.Dropdown(id = 'talk_dropDownId',
                   options = [{'label': str(talk), 'value':str(talk)} for talk in df['title'].unique()],
@@ -252,20 +273,22 @@ def talk_dropDown():
                   style= {'width':'600px'}
                  )
     return drop
+
+# merging the above elemnet in the big container for the recommendation
 def recommendation_container():
-        # dbc.Container([
-        # row 2 slider and drop down =============================================================================================
         analysis = dbc.Container([
+            # row 1: containg the title, and the dropdown list  =========================
             dbc.Row(
                 dbc.Col(
+                    # we make this to have the title and the dropdown alighned horizontally as col of a row
                     dbc.Row([
-                    dbc.Col([html.H1('Recommending Talks based on similar other talk')], width=7),
-                    dbc.Col(talk_dropDown(), width=5),
+                            dbc.Col([html.H1('Recommending Talks based on similar other talk')], width=7),
+                            dbc.Col(talk_dropDown(), width=5),
              ]),width = 12,className='card', style=
-                    {"padding-top": "2%", "padding-left": "2%", "padding-right": "2%",
-                   "padding-bottom": '2%'})
+                    {"padding-top": "2%", "padding-left": "2%", "padding-right": "2%", "padding-bottom": '2%'})
             ),
             html.Br(),
+            # row 2: data table that will have the result  =========================
             dbc.Row([
                 dbc.Col(dbc.Table(id='dataframe_id'), width=12, className="card")
             ])
@@ -275,6 +298,5 @@ def recommendation_container():
                    "padding-top": "2%", "padding-left": "2%", "padding-right": "2%",
                    "padding-bottom": '2%'
                }, fluid=True)
-
 
         return analysis

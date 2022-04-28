@@ -8,7 +8,7 @@ import pandas as pd
 from StaticCharts import *
 from Components import analysis_container, recommendation_container
 from recommendation_system import get_recommendation_based_title
-#get dataset in a variable
+
 df = get_dataFrame()
 
 
@@ -23,7 +23,7 @@ def switch_tab(at):
 def switch_tab_month_year(at):
     return new_scatter_line(df,at)
 
-
+# year slider and rate dropdown list update
 @app.callback(
     Output('pop_occupation', 'figure'),
     Output('pop_speaker', 'figure'),
@@ -62,7 +62,7 @@ def update_graphs_Slider_drop(curr_year,dropDownList):
     return pop_occupation, pop_speaker, pop_talk, most_disscution
 
 
- ###   main layout call backs
+# main layout callbacks update
 @app.callback(Output('tabs-main-container', 'children'),
               [Input('bigTabs', 'active_tab')])
 def render_content(tab):
@@ -71,7 +71,7 @@ def render_content(tab):
     elif tab == 'recommendation_Tab2_id':
         return recommendation_container()
 
-
+# talk name dropdown in recommendation system update
 @app.callback(Output("dataframe_id", "children"),
               Input('talk_dropDownId', 'value'))
 def update_table(value):
