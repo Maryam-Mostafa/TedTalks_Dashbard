@@ -7,14 +7,14 @@ import Callback
 
 app.layout = dbc.Container([
 
-    # row 1 cards of big number  ================================================================================
+    # row 1 cards of big number  and title  ======================================================
     dbc.Row([
         dbc.Col(mainTitle_desc(), width=7),
         dbc.Col([bigCards()], width=5),
 
         ], justify='evenly'),
     html.Br(),
-    # extra row  ================================================================================
+    # row 2 tabs for chosing the container layout ==================================================
     dbc.Row([
         dbc.Col([
             dbc.Tabs(
