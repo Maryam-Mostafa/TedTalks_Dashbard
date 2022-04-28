@@ -19,8 +19,7 @@ red_pallete = ['#8e0015', '#9b1422', '#a7272f', '#b43b3c', '#c04e49', '#cd6256',
 def mostPopularTalk(df):
     most_popular_talk_by_views = df.sort_values(by="views", ascending=False)
     fig = px.bar(most_popular_talk_by_views[:10], y="title", x="views", text='title', orientation='h',
-                 color='title', color_discrete_sequence=red_pallete,
-                 template="simple_white")
+                 color='title', color_discrete_sequence=red_pallete, template="simple_white")
     fig.update_traces(textposition='inside')
     fig.update_yaxes(showticklabels=False)
     fig.update(layout_showlegend=False)
@@ -58,7 +57,6 @@ def most_popular_speaker(df):
 
 
 def most_popular_speaker_occupation(df):
-
     top_occupations = df.sort_values(by="views", ascending=False)
     top_occupations.drop_duplicates(subset=['speaker_occupation'], inplace=True)
 
@@ -91,7 +89,7 @@ def durationBar_chart(df, at):
     fig.update_traces(textposition='inside')
     fig.update(layout_coloraxis_showscale=False)
     fig.update_xaxes(showticklabels=False)
-    fig.update_layout(margin=dict(l=20, r=20, t=20, b=20),)
+    fig.update_layout(margin=dict(l=20, r=20, t=20, b=20), )
 
     return fig
 

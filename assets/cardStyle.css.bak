@@ -136,7 +136,7 @@ body {
   color: white;
 }*/
 .Select-control {
-  width: 450px;
+  width: 460px;
 }
 .Select-value-label {
 color: white;
@@ -146,4 +146,9 @@ color: white;
 .Select-value {
   background-color: #9b1422;
   color: #fff;
+}
+
+.wc-tabs .active a {
+    background: #9b1422 none repeat scroll 0 0;
+    color: white;
 }
