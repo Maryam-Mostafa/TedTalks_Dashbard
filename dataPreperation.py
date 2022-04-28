@@ -1,4 +1,5 @@
 import pandas as pd
+from dash import html
 
 # Read The Ted DataSet
 df = pd.read_csv("ted_main.csv")
@@ -13,7 +14,7 @@ df = pd.read_csv("ted_main.csv")
 # print(df.isna().sum())
 
 # Preprocessing The Data
-
+df['speaker_occupation'].fillna('unknown', inplace = True)
 # Convert The Date Col. from Unix Timestamp to Date Type
 df['Date'] = pd.to_datetime(df['published_date'], unit='s')
 
@@ -35,7 +36,13 @@ df.drop('Date', inplace=True, axis=1)
 # print(df.info())
 df["tags"] = df["tags"].apply(eval)
 
-## preprocessing colun ratings
+
+link = []
+for i in df['url']:
+    link.append(html.A(html.P('Talk url'), href=i, target='_blank'))
+df['url'] = link
+
+# preprocessing column ratings
 df1 = pd.concat([pd.DataFrame(eval(x)) for x in df['ratings']], keys=df.index).reset_index(level=1, drop=True)
 df = df.join(df1).reset_index(drop=True)
 df = df.loc[df.groupby(['title'])['count'].idxmax()]
