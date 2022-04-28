@@ -146,7 +146,7 @@ def duration_card():
                     id="tabs",
                     active_tab="tab1_id",
                 ),
-                dcc.Graph(id='duration_fig1', config=config, className='shadow', style={'height':'62vh'})
+                dcc.Graph(id='duration_fig1', config=config, className='shadow', style={'height':'59vh'})
             ]
     return duration
 
@@ -166,7 +166,7 @@ def main_years_slider():
         ]
    return slider
 
-def dropDown():
+def dropDown(): # rate type dropdown
     drop = [
         html.H6("Rate type", className="me-1"),
         html.Br(),
@@ -203,3 +203,78 @@ def graphes2():
 
     ],justify='evenly')
     return row
+
+def analysis_container():
+     analysis = dbc.Container([
+         dbc.Row([
+                    dbc.Col(filters(), width=12, className="card"),
+
+                ],justify='around'),
+                html.Br(),
+
+                # row 3 ==================================================================================================
+                dbc.Row([
+                    dbc.Col(graphes1(), width=6),
+                    dbc.Col(graphes2(), width=6),
+
+                ],justify='evenly', className='div'),
+                html.Br(),
+
+                # row 4 ==================================================================================================
+                dbc.Row([
+                    dbc.Col(wordCloud(), width=4,),
+                    dbc.Col(duration_card(), width=8),
+
+                ]),
+                html.Br(),
+
+                # row 5 ==================================================================================================
+                dbc.Row([
+                    dbc.Col(yearMonthCard(), width=12),
+                ])
+         ],style={
+                   'backgroundColor': '#ECECEC',
+                   "padding-top": "2%", "padding-left": "2%", "padding-right": "2%",
+                   "padding-bottom": '2%'
+               }, fluid=True)
+
+     return analysis
+
+##################################### recommendation components for layout ######################################
+
+def talk_dropDown():
+    drop = dcc.Dropdown(id = 'talk_dropDownId',
+                  options = [{'label': str(talk), 'value':str(talk)} for talk in df['title'].unique()],
+                  value = 'Do schools kill creativity?',
+                  placeholder = 'Choose talk...',
+                  multi = False,
+                  className = 'dropdown',
+                  style= {'width':'600px'}
+                 )
+    return drop
+def recommendation_container():
+        # dbc.Container([
+        # row 2 slider and drop down =============================================================================================
+        analysis = dbc.Container([
+            dbc.Row(
+                dbc.Col(
+                    dbc.Row([
+                    dbc.Col([html.H1('Recommending Talks based on similar other talk')], width=7),
+                    dbc.Col(talk_dropDown(), width=5),
+             ]),width = 12,className='card', style=
+                    {"padding-top": "2%", "padding-left": "2%", "padding-right": "2%",
+                   "padding-bottom": '2%'})
+            ),
+            html.Br(),
+            dbc.Row([
+                dbc.Col(dbc.Table(id='dataframe_id'), width=12, className="card")
+            ])
+
+        ],style={
+                   'backgroundColor': '#ECECEC',
+                   "padding-top": "2%", "padding-left": "2%", "padding-right": "2%",
+                   "padding-bottom": '2%'
+               }, fluid=True)
+
+
+        return analysis
