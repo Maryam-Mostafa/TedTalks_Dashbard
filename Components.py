@@ -103,7 +103,7 @@ def wordCloud():
     img_card = html.Div([
             html.H4("Top TED searched tags", className="card-text"),
             html.Hr(),
-            html.Img(src=app.get_asset_url("finalwc.png"),style={'height':'100%', 'width':'100%'}, className='shadow')
+            html.Img(src=app.get_asset_url("Finalwc.png"),style={'height':'100%', 'width':'100%'}, className='shadow')
         ])
     return img_card
 
@@ -128,7 +128,7 @@ def mostPopSpreaker_Card():
 # most popular speaker occupation figure card
 def most_popular_occupation():
     occupation = [
-        html.H4("Most Popular Speakers Occupations", className="card-title"),
+        html.H4("Most Popular Occupations", className="card-title"),
         html.Hr(),
         dcc.Graph(id='pop_occupation', config=config, className='shadow')
 
@@ -158,7 +158,7 @@ def duration_card():
                     id="tabs",
                     active_tab="tab1_id",
                 ),
-                dcc.Graph(id='duration_fig1', config=config, className='shadow', style={'height':'59vh'})
+                dcc.Graph(id='duration_fig1', config=config, className='shadow', style={'height':'57vh'})
             ]
     return duration
 
@@ -188,7 +188,7 @@ def dropDown():
                   value = None,
                   placeholder = 'Choose rate types...',
                   multi = True,
-                  className = 'dropdown'
+                  className = 'dropdown',
                  ),
         html.Br()]
     return drop
@@ -197,9 +197,9 @@ def dropDown():
 def filters():
     row = dbc.Row([
         dbc.Col(main_years_slider(), width=8),
-        dbc.Col(dropDown(), width=4),
-
-    ], justify='evenly')
+        dbc.Col(dropDown(), width=3),
+    ],justify="evenly",)
+    return row
 
 
 # combine most_popular_occupation and mostPopSpreaker_Card in one a row
@@ -208,7 +208,7 @@ def graphes1():
         dbc.Col(most_popular_occupation(), width=6),
         dbc.Col(mostPopSpreaker_Card(), width=6),
 
-    ],justify='evenly')
+    ])
     return row
 
 # combine mostPopTalk_card and mostDiscussionTopic in a row
@@ -217,7 +217,7 @@ def graphes2():
         dbc.Col(mostPopTalk_card(), width=6),
         dbc.Col(mostDiscussionTopic(), width=6),
 
-    ],justify='evenly')
+    ])
     return row
 
 # merging all above elemnets in a big container for the analysis
@@ -226,8 +226,7 @@ def analysis_container():
                 # row 1: filters ==================================================
                 dbc.Row([
                     dbc.Col(filters(), width=12, className="card"),
-
-                ],justify='around'),
+                ]),
                 html.Br(),
 
                 # row 2: the 4 graphs merging then here in 2 cols ====================
@@ -270,7 +269,7 @@ def talk_dropDown():
                   placeholder = 'Choose talk...',
                   multi = False,
                   className = 'dropdown',
-                  style= {'width':'600px'}
+                  style= {'width':'400px'}
                  )
     return drop
 
@@ -282,9 +281,9 @@ def recommendation_container():
                 dbc.Col(
                     # we make this to have the title and the dropdown alighned horizontally as col of a row
                     dbc.Row([
-                            dbc.Col([html.H1('Recommending Talks based on similar other talk')], width=7),
-                            dbc.Col(talk_dropDown(), width=5),
-             ]),width = 12,className='card', style=
+                            dbc.Col([html.H2('Recommending Talks based on similar other talk')], width=7),
+                            dbc.Col(talk_dropDown(), width=4),
+             ], justify='evenly'),className='card', style=
                     {"padding-top": "2%", "padding-left": "2%", "padding-right": "2%", "padding-bottom": '2%'})
             ),
             html.Br(),
