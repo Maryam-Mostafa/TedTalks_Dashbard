@@ -1,5 +1,6 @@
 # TedTalks_Dashbard
 
+the dashboard url : https://tedtalkdaash.herokuapp.com/
 
 
 <!--<div align="center" id="top"> 
