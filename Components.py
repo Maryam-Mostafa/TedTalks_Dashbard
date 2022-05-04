@@ -178,6 +178,7 @@ def main_years_slider():
         ]
    return slider
 
+
 # rate type dropdown with title
 def dropDown():
     drop = [
