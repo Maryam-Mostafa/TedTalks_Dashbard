@@ -12,15 +12,16 @@ the dashboard url : https://tedtalkdaash.herokuapp.com/
 </h4> 
 
 <hr> -->
-
-<!--<p align="center">
+![analysis part](/assets/dashboard_img/analysis.png)
+![analysis part](/assets/dashboard_img/recommendation.png)
+<p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
   <a href="https://github.com/Murphy-purp/TedTalks_Dashbard" target="_blank">Author</a>
-</p> -->
+</p>
 
 <br>
 
