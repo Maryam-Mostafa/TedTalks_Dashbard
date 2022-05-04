@@ -176,6 +176,7 @@ def main_years_slider():
             marks={str(i): str(i) for i in df['year'].unique()}
                    ), html.Br()
         ]
+
    return slider
 
 # rate type dropdown with title
